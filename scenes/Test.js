@@ -65,6 +65,7 @@ class MainScene extends Scene {
         this.cameras.main.startFollow(this.bubbie);
         this.cameras.main.setBackgroundColor(0x0055AA);
 
+        // Keyboard controls
         this.cursors = this.input.keyboard.addKeys({
             up: Phaser.Input.Keyboard.KeyCodes.W,
             down: Phaser.Input.Keyboard.KeyCodes.S,
@@ -73,25 +74,47 @@ class MainScene extends Scene {
             jump: Phaser.Input.Keyboard.KeyCodes.PERIOD
         });
 
+        // Virtual controls
+        const dUp = document.querySelector('.up');
+        this.vUp = false;
+        const dRi = document.querySelector('.ri');
+        this.vRi = false;
+        const dDo = document.querySelector('.do');
+        this.vDo = false;
+        const dLe = document.querySelector('.le');
+        this.vLe = false;
+
+        const handlePointer = (e) => {
+          let pageX = -100;
+          let pageY = -100;
+          if (e.targetTouches[0]) {
+            pageX = e.targetTouches[0].pageX;
+            pageY = e.targetTouches[0].pageY;
+          }
+          const targetEle = document.elementFromPoint(pageX, pageY);
+
+          this.vRi = (targetEle === dRi);
+          this.vLe = (targetEle === dLe);
+
+          if ((this.vRi || this.vLe) && navigator.vibrate) {
+            navigator.vibrate(50);
+          }
+        }
+
+        document.addEventListener('touchstart', handlePointer);
+        document.addEventListener('touchmove', handlePointer);
+        document.addEventListener('touchend', handlePointer);
+
+        const bA = document.querySelector('.a');
+        const bB = document.querySelector('.b');
+
+        bA.addEventListener('touchstart', () => this.bubActionA());
+        bB.addEventListener('touchstart', () => this.bubActionB());
+
         this.attacking = false;
         this.jumpAttacking = false;
         this.input.keyboard.on('keydown-FORWARD_SLASH', () => {
-            if (!this.attacking && !this.jumpAttacking) {
-                const {y: vy} = this.bubbie.body.velocity;
-
-                this.bubbie.body.setVelocityX(0);
-
-                if (vy === 0) {
-                    this.bubbie.play({ key: 'Bub-Sword-Ground', repeat: 0 }, true);
-                    this.attacking = true;
-                }
-                else {
-                    this.bubbie.play({ key: 'Bub-Sword-Air', repeat: -1 }, true);
-                    this.bubbie.body.setVelocityY(200);
-                    this.jumpAttacking = true;
-
-                }
-            }
+            this.bubActionB();
         });
 
         this.bubbie.on('animationcomplete-Bub-Sword-Ground', () => {
@@ -99,15 +122,42 @@ class MainScene extends Scene {
         });
     }
 
+    bubActionA() {
+        const {y: vy} = this.bubbie.body.velocity;
+
+        if (vy === 0) {
+            this.bubbie.body.setVelocityY(-400);
+        }
+    }
+
+    bubActionB() {
+        if (!this.attacking && !this.jumpAttacking) {
+            const {y: vy} = this.bubbie.body.velocity;
+
+            this.bubbie.body.setVelocityX(0);
+
+            if (vy === 0) {
+                this.bubbie.play({ key: 'Bub-Sword-Ground', repeat: 0 }, true);
+                this.attacking = true;
+            }
+            else {
+                this.bubbie.play({ key: 'Bub-Sword-Air', repeat: -1 }, true);
+                this.bubbie.body.setVelocityY(200);
+                this.jumpAttacking = true;
+
+            }
+        }
+    }
+
     update() {
         const {up, down, left, right, jump} = this.cursors;
         const {x: vx, y: vy} = this.bubbie.body.velocity;
 
         if (!this.attacking && !this.jumpAttacking) {
-            if (left.isDown) {
+            if (left.isDown || this.vLe) {
                 this.bubbie.body.setVelocityX(-200);
             }
-            else if (right.isDown) {
+            else if (right.isDown || this.vRi) {
                 this.bubbie.body.setVelocityX(200);
             }
             else {
@@ -116,7 +166,7 @@ class MainScene extends Scene {
         
 
             if (jump.isDown && vy === 0) {
-                this.bubbie.body.setVelocityY(-400);
+                this.bubActionA();
             }
 
             if (vx < 0) {

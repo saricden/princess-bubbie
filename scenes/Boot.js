@@ -23,7 +23,7 @@ export default class Boot extends Scene {
 
 		this.anims.createFromAseprite('bubbie');
 
-		this.add.text(w / 2, h / 2, 'Click to Play').setOrigin(0.5);
+		this.add.text(w / 2, h / 2, 'Click or tap to Play').setOrigin(0.5);
 
 		this.input.once('pointerdown', () => {
 			this.scene.start('scene-test');

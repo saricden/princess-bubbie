@@ -6,9 +6,14 @@ import Boot from './scenes/Boot';
 import Test from './scenes/Test';
 
 const config = {
-    type: Phaser.WEBGL,  // Use WebGL if available, otherwise fallback to Canvas
-    width: window.innerWidth,         // Set initial width to the window's width
-    height: window.innerHeight,       // Set initial height to the window's height
+    type: Phaser.WEBGL,
+    width: 720,
+    height: 720,
+    scale: {
+        parent: 'game',
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
+    },
     scene: [
       Boot,
       Test
@@ -16,19 +21,19 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 800 },  // Example gravity, change as needed
+            gravity: { y: 800 },
             debug: false
         }
     },
     pixelArt: true
 };
 
-// Create the game instance with the configured settings
 const game = new Phaser.Game(config);
 
-// Adjust the game size when the window is resized
-window.addEventListener('resize', () => {
-    game.scale.resize(window.innerWidth, window.innerHeight);
-});
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+window.addEventListener('touchstart', () => document.documentElement.classList.add('virtual'));
+
+window.addEventListener('keydown', () => document.documentElement.classList.remove('virtual'));
 
 export default game;
