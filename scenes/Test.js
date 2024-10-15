@@ -1,5 +1,6 @@
 import Phaser, { Scene } from 'phaser';
 import SlimJim from '../sprites/SlimJim';
+import Gargoyle from '../sprites/Gargoyle';
 
 class MainScene extends Scene {
     constructor() {
@@ -10,7 +11,7 @@ class MainScene extends Scene {
         // Create the tilemap
         const map = this.add.tilemap('map-test');
         const tileset = map.addTilesetImage('tiles');
-        const ground = map.createLayer('ground', tileset, 0, 0);
+        this.ground = map.createLayer('ground', tileset, 0, 0);
 
         // Create the Aseprite sprite and play an animation
         this.bubbie = this.physics.add.sprite(0, 0, 'bubbie');
@@ -37,7 +38,9 @@ class MainScene extends Scene {
             }
         });
 
-        ground.setCollisionByProperty({ collides: true });
+        this.ground.setCollisionByProperty({ collides: true });
+
+        this.enemies = [];
 
         map.getObjectLayer('spawn').objects.forEach((obj) => {
             if (obj.name === 'bubbie') {
@@ -53,15 +56,20 @@ class MainScene extends Scene {
                     slimJim.damage(this.bubbie.x);
                 });
             }
+            else if (obj.name === 'gargoyle') {
+                const gargoyle = new Gargoyle(this, obj.x, obj.y);
+
+                this.enemies.push(gargoyle);
+            }
         });
 
-        this.physics.add.collider(this.bubbie, ground);
+        this.physics.add.collider(this.bubbie, this.ground);
 
         // Play the default animation (or specify one, e.g., 'idle')
         this.bubbie.play({ key: 'Bub-Down', repeat: -1 }, true);
 
         this.cameras.main.setZoom(20);
-        this.cameras.main.zoomTo(3, 1000);
+        this.cameras.main.zoomTo(2, 1000);
         this.cameras.main.startFollow(this.bubbie);
         this.cameras.main.setBackgroundColor(0x0055AA);
 
@@ -152,6 +160,10 @@ class MainScene extends Scene {
     update() {
         const {up, down, left, right, jump} = this.cursors;
         const {x: vx, y: vy} = this.bubbie.body.velocity;
+
+        this.enemies.forEach((enemy) => {
+            if (typeof enemy.update === 'function') enemy.update();
+        });
 
         if (!this.attacking && !this.jumpAttacking) {
             if (left.isDown || this.vLe) {

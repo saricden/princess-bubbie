@@ -113,14 +113,14 @@
                 {
                  "class":"",
                  "height":0,
-                 "id":3,
-                 "name":"slim-jim",
+                 "id":4,
+                 "name":"gargoyle",
                  "point":true,
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":752,
-                 "y":560
+                 "x":1284,
+                 "y":695
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -129,7 +129,7 @@
          "y":0
         }],
  "nextlayerid":3,
- "nextobjectid":4,
+ "nextobjectid":5,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.1",

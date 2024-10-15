@@ -12,6 +12,7 @@ export default class Boot extends Scene {
 
     // Sprites
     this.load.aseprite('bubbie', '/sprites/bubbie.png', '/sprites/bubbie.json');
+    this.load.aseprite('gargoyle', '/sprites/gargoyle.png', '/sprites/gargoyle.json');
     this.load.image('slim-jim', '/sprites/slim-jim.png');
 
     // FX
@@ -22,6 +23,7 @@ export default class Boot extends Scene {
 		const {width: w, height: h} = this.game.scale;
 
 		this.anims.createFromAseprite('bubbie');
+		this.anims.createFromAseprite('gargoyle');
 
 		this.add.text(w / 2, h / 2, 'Click or tap to Play').setOrigin(0.5);
 
