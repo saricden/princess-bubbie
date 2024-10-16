@@ -34,8 +34,8 @@ class Gargoyle extends Sprite {
 		this.isActive = false;
 		this.activateThreshold = 105;
 		this.fallThreshold = 8;
-		this.clearThreshold = 20;
-		this.clearance = 150;
+		this.clearThreshold = 10;
+		this.clearance = 110;
 		this.isAtk = false;
 		this.hitMap = false;
 		this.speed = 50;

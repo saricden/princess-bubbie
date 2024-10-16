@@ -69,7 +69,7 @@ class MainScene extends Scene {
         this.bubbie.play({ key: 'Bub-Down', repeat: -1 }, true);
 
         this.cameras.main.setZoom(20);
-        this.cameras.main.zoomTo(2, 1000);
+        this.cameras.main.zoomTo(3, 1000);
         this.cameras.main.startFollow(this.bubbie);
         this.cameras.main.setBackgroundColor(0x0055AA);
 
