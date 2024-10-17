@@ -119,8 +119,20 @@
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":1284,
-                 "y":695
+                 "x":1573,
+                 "y":623
+                }, 
+                {
+                 "class":"",
+                 "height":0,
+                 "id":5,
+                 "name":"gargoyle",
+                 "point":true,
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":1374,
+                 "y":694
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -129,7 +141,7 @@
          "y":0
         }],
  "nextlayerid":3,
- "nextobjectid":5,
+ "nextobjectid":6,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.1",

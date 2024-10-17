@@ -56,7 +56,7 @@ class MainScene extends Scene {
         this.bubbie.update();
 
         this.enemies.forEach((enemy) => {
-            if (typeof enemy.update === 'function') enemy.update();
+            if (enemy && typeof enemy.update === 'function') enemy.update();
         });
     }
 }

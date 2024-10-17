@@ -24,6 +24,8 @@ class Gargoyle extends Sprite {
 				this.hitMap = true;
 
 				this.scene.time.delayedCall(this.restTimeMs, () => {
+					if (!this.body) return;
+
 					this.isAtk = false;
 					this.hitMap = false;
 					this.body.setAllowGravity(false);
@@ -38,6 +40,10 @@ class Gargoyle extends Sprite {
 			bubbie.takeDamage(1, this);
 		});
 
+		this.scene.physics.add.overlap(this, bubbie.atkBox, () => {
+			this.takeDamage(1, bubbie);
+		});
+
 		this.isActive = false;
 		this.activateThreshold = 105;
 		this.fallThreshold = 8;
@@ -46,42 +52,66 @@ class Gargoyle extends Sprite {
 		this.isAtk = false;
 		this.hitMap = false;
 		this.speed = 50;
-		this.restTimeMs = 1200;
+		this.restTimeMs = 1800;
 		this.bloodConfig = {
 			follow: this,
-			tint: 0xFF0000,
+			tint: 0x00AA00,
 			speedX: { min: -100, max: 100 },
 			speedY: { min: -100, max: 100 },
 			gravityY: 200,
-			quantity: 10,
-			scale: { min: 1, max: 4 }
+			quantity: 2,
+			scale: { min: 1, max: 4 },
+			alpha: { start: 1, end: 0}
 		};
+		this.maxHp = 3;
+		this.hp = this.maxHp;
+		this.invincible = false;
 
 		this.blood = this.scene.add.particles(0, 0, 'pixel', this.bloogConfig);
 		this.blood.stop();
 	}
 
-	// takeDamage(dmg, damager) {
-	// 	const splatDir = (this.scene.bubbie.x < this.x ? 1 : -1);
-	// 	this.blood.setConfig({
-	// 		...this.bloodConfig,
-	// 		speedX: { min: splatDir * 100, max: splatDir * 300 }
-	// 	})
-	// 	this.blood.explode(100);
-	// 	this.scene.cameras.main.flash(200, 255, 0, 0);
+	takeDamage(dmg, damager) {
+		if (!this.invincible) {
+			if (this.hp - 1 > 0) {
+				const splatDir = (damager.x < this.x ? 1 : -1);
+				this.blood.setConfig({
+					...this.bloodConfig,
+					speedX: { min: splatDir * 100, max: splatDir * 300 }
+				});
+				this.blood.explode(100);
 
-	// 	this.scene.tweens.addCounter({
-    //         from: 0,
-    //         to: 255,
-    //         duration: 1000,
-    //         onUpdate: (tween) => {
-    //             const value = Math.floor(tween.getValue());
-    //             this.setTint(Display.Color.GetColor(value, 0, 0));
-    //         }
-    //     });
-	// }
+				this.scene.tweens.addCounter({
+		            from: 0,
+		            to: 255,
+		            duration: 1000,
+		            onUpdate: (tween) => {
+		                const value = Math.floor(tween.getValue());
+		                this.setTint(Display.Color.GetColor(value, 0, 0));
+		            }
+		        });
+
+		        this.hp -= dmg;
+		        this.invincible = true;
+
+		        this.scene.time.delayedCall(500, () => this.invincible = false);
+			}
+			else {
+				this.scene.cameras.main.flash(600, 0, 255, 0);
+				this.blood.setConfig({
+					...this.bloodConfig,
+					speedX: { min: -200, max: 200 },
+					speedY: { min: -200, max: 200 }
+				});
+				this.blood.explode(200);
+				this.destroy();
+			}
+		}
+	}
 
 	update() {
+		if (!this.body) return;
+		
 		const {x: tx, y: ty} = this.target;
 		const {x, y, fallThreshold: ft, speed: s, isAtk, clearance, hitMap, isActive, activateThreshold, clearThreshold} = this;
 
