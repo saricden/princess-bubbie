@@ -14,7 +14,9 @@ class Bubbie extends Sprite {
         this.body.setSize(17, 28);
         this.body.setOffset(8, 6);
 
-        this.scene.physics.add.collider(this, this.scene.ground);
+        this.scene.physics.add.collider(this, this.scene.ground, () => {
+        	if (this.movementLocked) this.movementLocked = false;
+        });
 
         this.atkBox = this.scene.add.rectangle(0, 0, 17, 28);
         this.atkBox.setOrigin(0.5, 1);
@@ -37,6 +39,10 @@ class Bubbie extends Sprite {
 
         this.attacking = false;
         this.jumpAttacking = false;
+        this.maxHp = 6;
+        this.hp = this.maxHp;
+        this.movementLocked = false;
+        this.invincible = false;
 
         this.on('animationcomplete-Bub-Sword-Ground', () => {
             this.attacking = false;
@@ -62,17 +68,17 @@ class Bubbie extends Sprite {
         this.vLe = false;
 
         const handlePointer = (e) => {
-          let pageX = -100;
-          let pageY = -100;
-          if (e.targetTouches[0]) {
-            pageX = e.targetTouches[0].pageX;
-            pageY = e.targetTouches[0].pageY;
-          }
-          const targetEle = document.elementFromPoint(pageX, pageY);
+			let pageX = -100;
+			let pageY = -100;
+			if (e.targetTouches[0]) {
+				pageX = e.targetTouches[0].pageX;
+				pageY = e.targetTouches[0].pageY;
+			}
+			const targetEle = document.elementFromPoint(pageX, pageY);
 
-          this.vRi = (targetEle === dRi);
-          this.vLe = (targetEle === dLe);
-        }
+			this.vRi = (targetEle === dRi);
+			this.vLe = (targetEle === dLe);
+		}
 
         document.addEventListener('touchstart', handlePointer);
         document.addEventListener('touchmove', handlePointer);
@@ -87,6 +93,37 @@ class Bubbie extends Sprite {
         this.scene.input.keyboard.on('keydown-FORWARD_SLASH', () => {
             this.actionB();
         });
+	}
+
+	takeDamage(dmg, damager) {
+		if (!this.invincible) {
+			if (this.hp -1 > 0) {
+				const dirX = (damager.x > this.x ? -1 : 1);
+				const dirY = (damager.y < this.y ? 1 : -1);
+
+				this.invincible = true;
+				this.movementLocked = true;
+				this.body.setVelocity(dirX * dmg * 250, dirY * dmg * 250);
+
+				this.hp -= 1;
+
+				this.scene.cameras.main.shake(150, 0.0035);
+
+				this.scene.tweens.add({
+					targets: [this],
+					alpha: 0.6,
+					yoyo: true,
+					repeat: 8,
+					duration: 100,
+					onComplete: () => {
+						this.invincible = false;
+					}
+				});
+			}
+			else {
+				this.scene.scene.restart();
+			}
+		}
 	}
 
 	actionA() {
@@ -121,26 +158,28 @@ class Bubbie extends Sprite {
         const {x: vx, y: vy} = this.body.velocity;
 
     	if (!this.attacking && !this.jumpAttacking) {
-            if (left.isDown || this.vLe) {
-                this.body.setVelocityX(-200);
-            }
-            else if (right.isDown || this.vRi) {
-                this.body.setVelocityX(200);
-            }
-            else {
-                this.body.setVelocityX(0);
-            }    
-        
-            if (jump.isDown && vy === 0) {
-                this.actionA();
-            }
+    		if (!this.movementLocked) {
+    			if (left.isDown || this.vLe) {
+	                this.body.setVelocityX(-200);
+	            }
+	            else if (right.isDown || this.vRi) {
+	                this.body.setVelocityX(200);
+	            }
+	            else {
+	                this.body.setVelocityX(0);
+	            }    
+	        
+	            if (jump.isDown && vy === 0) {
+	                this.actionA();
+	            }
 
-            if (vx < 0) {
-                this.setFlipX(true);
-            }
-            else if (vx > 0) {
-                this.setFlipX(false);
-            }
+	            if (vx < 0) {
+	                this.setFlipX(true);
+	            }
+	            else if (vx > 0) {
+	                this.setFlipX(false);
+	            }
+    		}
 
 
             if (vy === 0) {

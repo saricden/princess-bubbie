@@ -13,7 +13,7 @@ class MainScene extends Scene {
         const tileset = map.addTilesetImage('tiles');
         this.ground = map.createLayer('ground', tileset, 0, 0);
 
-        // Create the Aseprite sprite and play an animation
+        // Init Bubbie
         this.bubbie = new Bubbie(this, 0, 0);
 
         this.ground.setCollisionByProperty({ collides: true });
@@ -41,10 +41,15 @@ class MainScene extends Scene {
             }
         });
 
+        // Setup main camera
         this.cameras.main.setZoom(20);
         this.cameras.main.zoomTo(3, 1000);
         this.cameras.main.startFollow(this.bubbie);
         this.cameras.main.setBackgroundColor(0x0055AA);
+
+        // Launch HUD
+        this.scene.launch('scene-hud', { parentScene: this });
+        this.hud = this.scene.get('scene-hud');
     }
 
     update() {

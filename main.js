@@ -5,6 +5,9 @@ import Phaser from 'phaser';
 import Boot from './scenes/Boot';
 import Test from './scenes/Test';
 
+// Heads up display
+import HUD from './scenes/HUD';
+
 const config = {
     type: Phaser.WEBGL,
     width: 720,
@@ -15,8 +18,10 @@ const config = {
         autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
     },
     scene: [
-      Boot,
-      Test
+        Boot,
+        Test,
+        
+        HUD
     ],
     physics: {
         default: 'arcade',
