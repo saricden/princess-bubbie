@@ -81,7 +81,7 @@ export default class Boot extends Scene {
 		this.anims.createFromAseprite('ghost');
 
 		this.add.text(w / 2, h / 2, 'Click to Play', {
-	        font: '62px monospace',
+	        font: '42px monospace',
 	        fill: '#ffffff'
 		}).setOrigin(0.5);
 
