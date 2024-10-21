@@ -131,6 +131,7 @@ class Bubbie extends Sprite {
 				});
 			}
 			else {
+                this.scene.bgm.stop();
 				this.scene.scene.restart();
 			}
 		}

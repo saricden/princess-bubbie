@@ -91,10 +91,11 @@ class MainScene extends Scene {
         this.hud = this.scene.get('scene-hud');
 
         // Play music
-        this.sound.play('music-castle', {
+        this.bgm = this.sound.add('music-castle', {
             volume: 0.55,
             repeat: -1
         });
+        this.bgm.play();
     }
 
     update(time, delta) {
