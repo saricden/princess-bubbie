@@ -42,6 +42,14 @@ class Gargoyle extends Sprite {
 
 		this.scene.physics.add.overlap(this, bubbie.atkBox, () => {
 			this.takeDamage(1, bubbie);
+
+			if (bubbie.jumpAttacking) {
+				const {flipX} = bubbie;
+				const xVel = ((flipX ? 1 : -1) * 150);
+				const yVel = -350;	
+
+				bubbie.body.setVelocity(xVel, yVel);
+			}
 		});
 
 		this.isActive = false;

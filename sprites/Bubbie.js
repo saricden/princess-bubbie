@@ -200,6 +200,12 @@ class Bubbie extends Sprite {
         else if (this.jumpAttacking && vy === 0) {
             this.jumpAttacking = false;
         }
+        else if (this.jumpAttacking) {
+            const {x, y} = this;
+            const yo = 20;
+
+            this.atkBox.setPosition(x, y + yo);
+        }
     }
 }
 
