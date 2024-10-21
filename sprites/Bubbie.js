@@ -103,7 +103,7 @@ class Bubbie extends Sprite {
 
 	takeDamage(dmg, damager) {
 		if (!this.invincible) {
-			if (this.hp -1 > 0) {
+			if (this.hp - dmg > 0) {
 				const dirX = (damager.x > this.x ? -1 : 1);
 				const dirY = (damager.y < this.y ? 1 : -1);
                 const splatDir = (damager.x < this.x ? 1 : -1);
@@ -115,7 +115,7 @@ class Bubbie extends Sprite {
 				this.movementLocked = true;
 				this.body.setVelocity(dirX * dmg * 250, dirY * dmg * 250);
 
-				this.hp -= 1;
+				this.hp -= dmg;
 
 				this.scene.cameras.main.shake(150, 0.0035);
 

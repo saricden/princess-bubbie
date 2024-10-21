@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="201" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="18">
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="201" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="23">
  <editorsettings>
   <export target="../public/maps/test.json" format="json"/>
  </editorsettings>
@@ -135,6 +135,21 @@
    <point/>
   </object>
   <object id="17" name="gargoyle" x="2598" y="572">
+   <point/>
+  </object>
+  <object id="18" name="ghoul" x="1094" y="742">
+   <point/>
+  </object>
+  <object id="19" name="ghoul" x="810" y="634.667">
+   <point/>
+  </object>
+  <object id="20" name="ghoul" x="1940.67" y="698">
+   <point/>
+  </object>
+  <object id="21" name="ghoul" x="2637.33" y="796.667">
+   <point/>
+  </object>
+  <object id="22" name="ghoul" x="2746.67" y="606.667">
    <point/>
   </object>
  </objectgroup>

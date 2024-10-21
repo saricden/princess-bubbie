@@ -81,7 +81,7 @@ class Gargoyle extends Sprite {
 
 	takeDamage(dmg, damager) {
 		if (!this.invincible) {
-			if (this.hp - 1 > 0) {
+			if (this.hp - dmg > 0) {
 				const splatDir = (damager.x < this.x ? 1 : -1);
 				const ri = pMath.Between(1, 5);
 

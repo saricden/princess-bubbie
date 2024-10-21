@@ -36,6 +36,7 @@ export default class Boot extends Scene {
 	    this.load.image('sus', '/sprites/sus.png');
 	    this.load.image('boo', '/sprites/boo.png');
 	    this.load.aseprite('ghost', '/sprites/ghost.png', '/sprites/ghost.json');
+	    this.load.aseprite('ghoul', '/sprites/ghoul.png', '/sprites/ghoul.json');
 
 	    // UI
 	    this.load.aseprite('ui-heart', '/sprites/ui/heart.png', '/sprites/ui/heart.json');
@@ -89,6 +90,7 @@ export default class Boot extends Scene {
 		this.anims.createFromAseprite('bubbie');
 		this.anims.createFromAseprite('gargoyle');
 		this.anims.createFromAseprite('ghost');
+		this.anims.createFromAseprite('ghoul');
 
 		this.add.text(w / 2, h / 2, 'Click to Play', {
 	        font: '42px monospace',

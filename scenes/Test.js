@@ -4,6 +4,7 @@ import Gargoyle from '../sprites/Gargoyle';
 import Sus from '../sprites/Sus';
 import Boo from '../sprites/Boo';
 import Ghost from '../sprites/Ghost';
+import Ghoul from '../sprites/Ghoul';
 
 class MainScene extends Scene {
     constructor() {
@@ -77,6 +78,11 @@ class MainScene extends Scene {
                 const ghost = new Ghost(this, obj.x, obj.y);
 
                 this.enemies.push(ghost);
+            }
+            else if (obj.name === 'ghoul') {
+                const ghoul = new Ghoul(this, obj.x, obj.y);
+
+                this.enemies.push(ghoul);
             }
         });
 
