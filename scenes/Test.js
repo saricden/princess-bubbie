@@ -13,6 +13,26 @@ class MainScene extends Scene {
         const tileset = map.addTilesetImage('tiles');
         this.ground = map.createLayer('ground', tileset, 0, 0);
 
+        // Auto paralax layers
+        const map2 = this.add.tilemap('map-test');
+        const tileset2 = map2.addTilesetImage('tiles');
+        const layer1 = map2.createLayer('ground', tileset2, 0, 0);
+
+        layer1.setScale(0.85);
+        layer1.setTint(0x0000AA);
+        layer1.setScrollFactor(0.8);
+        layer1.setDepth(-1);
+
+        const map3 = this.add.tilemap('map-test');
+        const tileset3 = map3.addTilesetImage('tiles');
+        const layer2 = map3.createLayer('ground', tileset3, 0, 0);
+
+        layer2.setScale(0.75);
+        layer2.setTint(0x000088);
+        layer2.setScrollFactor(0.7);
+        layer2.setDepth(-2);
+
+
         // Init Bubbie
         this.bubbie = new Bubbie(this, 0, 0);
 
@@ -45,7 +65,7 @@ class MainScene extends Scene {
         this.cameras.main.setZoom(20);
         this.cameras.main.zoomTo(3, 1000);
         this.cameras.main.startFollow(this.bubbie);
-        this.cameras.main.setBackgroundColor(0x0055AA);
+        this.cameras.main.setBackgroundColor(0x000044);
 
         // Launch HUD
         this.scene.launch('scene-hud', { parentScene: this });
