@@ -1,4 +1,4 @@
-import {GameObjects} from 'phaser';
+import {GameObjects, Math as pMath} from 'phaser';
 
 const {Sprite} = GameObjects;
 
@@ -51,6 +51,8 @@ class Ghost extends Sprite {
 		};
 		this.blood = this.scene.add.particles(0, 0, 'pixel', this.bloogConfig);
 		this.blood.stop();
+		this.isActive = false;
+		this.activateThreshold = 105;
 	}
 
 	detonate() {
@@ -67,12 +69,21 @@ class Ghost extends Sprite {
 
 	update() {
 		if (!this.body) return;
-
+		
 		const {x: tx, y: ty} = this.target;
-		const {x, y, speed} = this;
+		const {isActive, activateThreshold, x, y, speed} = this;
 
-		this.body.setVelocity(((x <= tx ? 1 : -1) * speed), ((y <= ty ? 1 : -1) * speed));
-		this.setFlipX(x >= tx);
+		if (!isActive) {
+			const d2t = pMath.Distance.Between(x, y, tx, ty);
+
+			if (d2t <= activateThreshold) {
+				this.isActive = true;
+			}
+		}
+		else {
+			this.body.setVelocity(((x <= tx ? 1 : -1) * speed), ((y <= ty ? 1 : -1) * speed));
+			this.setFlipX(x >= tx);
+		}
 	}
 }
 
