@@ -3,6 +3,7 @@ import Bubbie from '../sprites/Bubbie';
 import Gargoyle from '../sprites/Gargoyle';
 import Sus from '../sprites/Sus';
 import Boo from '../sprites/Boo';
+import Ghost from '../sprites/Ghost';
 
 class MainScene extends Scene {
     constructor() {
@@ -72,6 +73,11 @@ class MainScene extends Scene {
 
                 this.npcs.push(boo);
             }
+            else if (obj.name === 'ghost') {
+                const ghost = new Ghost(this, obj.x, obj.y);
+
+                this.enemies.push(ghost);
+            }
         });
 
         // Setup main camera
@@ -85,15 +91,15 @@ class MainScene extends Scene {
         this.hud = this.scene.get('scene-hud');
     }
 
-    update() {
-        this.bubbie.update();
+    update(time, delta) {
+        this.bubbie.update(time, delta);
 
         this.enemies.forEach((enemy) => {
-            if (enemy && typeof enemy.update === 'function') enemy.update();
+            if (enemy && typeof enemy.update === 'function') enemy.update(time, delta);
         });
 
         this.npcs.forEach((npc) => {
-            if (npc && typeof npc.update === 'function') npc.update();
+            if (npc && typeof npc.update === 'function') npc.update(time, delta);
         });
     }
 }
