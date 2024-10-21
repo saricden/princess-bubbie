@@ -16,13 +16,13 @@ export default class Boot extends Scene {
 
 	    // Display percentage text
 	    const percentText = this.make.text({
-	      x: width / 2,
-	      y: height / 2,
-	      text: '0%',
-	      style: {
-	        font: '18px monospace',
-	        fill: '#ffffff'
-	      }
+			x: width / 2,
+			y: height / 2,
+			text: '0%',
+			style: {
+				font: '18px monospace',
+				fill: '#ffffff'
+			}
 	    });
 	    percentText.setOrigin(0.5, 0.5);
 
@@ -52,24 +52,30 @@ export default class Boot extends Scene {
 	    this.load.audio('sfx-hit4', '/sfx/hit26.mp3');
 	    this.load.audio('sfx-hit5', '/sfx/hit35.mp3');
 	    this.load.audio('sfx-kaboom', '/sfx/kaboom.mp3');
+	    this.load.audio('sfx-sword1', '/sfx/sword.4.mp3');
+	    this.load.audio('sfx-sword2', '/sfx/sword.5.mp3');
+	    this.load.audio('sfx-sword3', '/sfx/sword.7.mp3');
+
+	    // Music
+	    this.load.audio('music-castle', '/music/That 90s Kid - The Whispering Shadows Dungeon.mp3');
 
 	    // FX
 	    this.load.image('pixel', '/fx/pixel.png');
 
 	    // Update progress bar based on loading progress
 	    this.load.on('progress', (value) => {
-	      percentText.setText(parseInt(value * 100) + '%');
-	      
-	      progressBar.clear();
-	      progressBar.fillStyle(0xffffff, 1); // white
-	      progressBar.fillRect(width / 4 + 10, height / 2 - 15, (width / 2 - 20) * value, 30);
+			percentText.setText(parseInt(value * 100) + '%');
+
+			progressBar.clear();
+			progressBar.fillStyle(0xffffff, 1); // white
+			progressBar.fillRect(width / 4 + 10, height / 2 - 15, (width / 2 - 20) * value, 30);
 	    });
 
 	    // Clean up when load is complete
 	    this.load.on('complete', () => {
-	      progressBar.destroy();
-	      progressBox.destroy();
-	      percentText.destroy();
+			progressBar.destroy();
+			progressBox.destroy();
+			percentText.destroy();
 	    });
 	  }
 

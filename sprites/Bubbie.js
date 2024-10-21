@@ -109,7 +109,7 @@ class Bubbie extends Sprite {
                 const splatDir = (damager.x < this.x ? 1 : -1);
                 const ri = pMath.Between(1, 5);
 
-                this.scene.sound.play(`sfx-hit${ri}`);
+                this.scene.sound.play(`sfx-hit${ri}`, { volume: 0.35 });
 
 				this.invincible = true;
 				this.movementLocked = true;
@@ -161,8 +161,10 @@ class Bubbie extends Sprite {
                 this.play({ key: 'Bub-Sword-Air', repeat: -1 }, true);
                 this.body.setVelocityY(200);
                 this.jumpAttacking = true;
-
             }
+
+            const ri = pMath.Between(1, 3);
+            this.scene.sound.play(`sfx-sword${ri}`, { volume: 0.35 });
         }
     }
 

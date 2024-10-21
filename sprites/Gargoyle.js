@@ -85,7 +85,7 @@ class Gargoyle extends Sprite {
 				const splatDir = (damager.x < this.x ? 1 : -1);
 				const ri = pMath.Between(1, 5);
 
-				this.scene.sound.play(`sfx-hit${ri}`);
+				this.scene.sound.play(`sfx-hit${ri}`, { volume: 0.35 });
 				this.blood.setConfig({
 					...this.bloodConfig,
 					speedX: { min: splatDir * 100, max: splatDir * 300 }

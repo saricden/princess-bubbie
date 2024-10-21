@@ -89,6 +89,12 @@ class MainScene extends Scene {
         // Launch HUD
         this.scene.launch('scene-hud', { parentScene: this });
         this.hud = this.scene.get('scene-hud');
+
+        // Play music
+        this.sound.play('music-castle', {
+            volume: 0.55,
+            repeat: -1
+        });
     }
 
     update(time, delta) {
