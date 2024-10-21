@@ -1,6 +1,8 @@
 import Phaser, { Scene } from 'phaser';
 import Bubbie from '../sprites/Bubbie';
 import Gargoyle from '../sprites/Gargoyle';
+import Sus from '../sprites/Sus';
+import Boo from '../sprites/Boo';
 
 class MainScene extends Scene {
     constructor() {
@@ -39,6 +41,7 @@ class MainScene extends Scene {
         this.ground.setCollisionByProperty({ collides: true });
 
         this.enemies = [];
+        this.npcs = [];
 
         map.getObjectLayer('spawn').objects.forEach((obj) => {
             if (obj.name === 'bubbie') {
@@ -59,6 +62,16 @@ class MainScene extends Scene {
 
                 this.enemies.push(gargoyle);
             }
+            else if (obj.name === 'sus') {
+                const sus = new Sus(this, obj.x, obj.y);
+
+                this.npcs.push(sus);
+            }
+            else if (obj.name === 'boo') {
+                const boo = new Boo(this, obj.x, obj.y);
+
+                this.npcs.push(boo);
+            }
         });
 
         // Setup main camera
@@ -77,6 +90,10 @@ class MainScene extends Scene {
 
         this.enemies.forEach((enemy) => {
             if (enemy && typeof enemy.update === 'function') enemy.update();
+        });
+
+        this.npcs.forEach((npc) => {
+            if (npc && typeof npc.update === 'function') npc.update();
         });
     }
 }

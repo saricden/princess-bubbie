@@ -13,6 +13,8 @@ export default class Boot extends Scene {
     // Sprites
     this.load.aseprite('bubbie', '/sprites/bubbie.png', '/sprites/bubbie.json');
     this.load.aseprite('gargoyle', '/sprites/gargoyle.png', '/sprites/gargoyle.json');
+    this.load.image('sus', '/sprites/sus.png');
+    this.load.image('boo', '/sprites/boo.png');
 
     // UI
     this.load.aseprite('ui-heart', '/sprites/ui/heart.png', '/sprites/ui/heart.json');
