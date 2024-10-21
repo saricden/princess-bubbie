@@ -141,8 +141,10 @@ class Bubbie extends Sprite {
 
         if (vy === 0) {
             const ri = pMath.Between(1, 5);
+            const vi = pMath.Between(1, 2);
 
             this.scene.sound.play(`sfx-step${ri}`, { volume: 0.15 });
+            this.scene.sound.play(`vo-bubbie-jump${vi}`, { volume: 0.85 });
             this.body.setVelocityY(-400);
         }
     }

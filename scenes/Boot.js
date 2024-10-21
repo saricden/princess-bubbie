@@ -59,6 +59,10 @@ export default class Boot extends Scene {
 	    // Music
 	    this.load.audio('music-castle', '/music/That 90s Kid - The Whispering Shadows Dungeon.mp3');
 
+	    // Vocals
+	    this.load.audio('vo-bubbie-jump1', '/vocals/bubbie-jump1.mp3');
+	    this.load.audio('vo-bubbie-jump2', '/vocals/bubbie-jump2.mp3');
+
 	    // FX
 	    this.load.image('pixel', '/fx/pixel.png');
 
