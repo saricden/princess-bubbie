@@ -54,6 +54,7 @@ class Ghost extends Sprite {
 	}
 
 	detonate() {
+		this.scene.sound.play('sfx-kaboom');
 		this.scene.cameras.main.flash(600, 0, 255, 0);
 		this.blood.setConfig({
 			...this.bloodConfig,
@@ -66,7 +67,7 @@ class Ghost extends Sprite {
 
 	update() {
 		if (!this.body) return;
-		
+
 		const {x: tx, y: ty} = this.target;
 		const {x, y, speed} = this;
 

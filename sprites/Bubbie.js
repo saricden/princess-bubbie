@@ -1,4 +1,4 @@
-import {GameObjects} from 'phaser';
+import {GameObjects, Math as pMath} from 'phaser';
 
 const {Sprite} = GameObjects;
 
@@ -30,6 +30,11 @@ class Bubbie extends Sprite {
 
                 this.atkBox.setPosition(x + xo, y);
             }
+            else if (key === 'Bub-Run' && [1, 3].includes(index)) {
+                const ri = pMath.Between(1, 5);
+
+                this.scene.sound.play(`sfx-step${ri}`, { volume: 0.25 });
+            }
             else {
                 this.atkBox.setPosition(0, 0);
             }
@@ -43,6 +48,7 @@ class Bubbie extends Sprite {
         this.hp = this.maxHp;
         this.movementLocked = false;
         this.invincible = false;
+        this.wasGrounded = false;
 
         this.on('animationcomplete-Bub-Sword-Ground', () => {
             this.attacking = false;
@@ -100,6 +106,10 @@ class Bubbie extends Sprite {
 			if (this.hp -1 > 0) {
 				const dirX = (damager.x > this.x ? -1 : 1);
 				const dirY = (damager.y < this.y ? 1 : -1);
+                const splatDir = (damager.x < this.x ? 1 : -1);
+                const ri = pMath.Between(1, 5);
+
+                this.scene.sound.play(`sfx-hit${ri}`);
 
 				this.invincible = true;
 				this.movementLocked = true;
@@ -130,6 +140,9 @@ class Bubbie extends Sprite {
         const {y: vy} = this.body.velocity;
 
         if (vy === 0) {
+            const ri = pMath.Between(1, 5);
+
+            this.scene.sound.play(`sfx-step${ri}`, { volume: 0.15 });
             this.body.setVelocityY(-400);
         }
     }
@@ -156,6 +169,14 @@ class Bubbie extends Sprite {
     update() {
     	const {up, down, left, right, jump} = this.cursors;
         const {x: vx, y: vy} = this.body.velocity;
+        const grounded = this.body.blocked.down;
+
+        if (grounded && !this.wasGrounded) {
+            const ri = pMath.Between(1, 5);
+            this.scene.sound.play(`sfx-step${ri}`, { volume: 0.35 });
+        }
+
+        this.wasGrounded = grounded;
 
     	if (!this.attacking && !this.jumpAttacking) {
     		if (!this.movementLocked) {

@@ -83,6 +83,9 @@ class Gargoyle extends Sprite {
 		if (!this.invincible) {
 			if (this.hp - 1 > 0) {
 				const splatDir = (damager.x < this.x ? 1 : -1);
+				const ri = pMath.Between(1, 5);
+
+				this.scene.sound.play(`sfx-hit${ri}`);
 				this.blood.setConfig({
 					...this.bloodConfig,
 					speedX: { min: splatDir * 100, max: splatDir * 300 }
@@ -105,6 +108,7 @@ class Gargoyle extends Sprite {
 		        this.scene.time.delayedCall(500, () => this.invincible = false);
 			}
 			else {
+				this.scene.sound.play('sfx-kaboom');
 				this.scene.cameras.main.flash(600, 0, 255, 0);
 				this.blood.setConfig({
 					...this.bloodConfig,

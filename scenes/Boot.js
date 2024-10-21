@@ -20,6 +20,19 @@ export default class Boot extends Scene {
     // UI
     this.load.aseprite('ui-heart', '/sprites/ui/heart.png', '/sprites/ui/heart.json');
 
+    // Sound fx
+    this.load.audio('sfx-step1', '/sfx/metal_steps_02.mp3');
+    this.load.audio('sfx-step2', '/sfx/metal_steps_03.mp3');
+    this.load.audio('sfx-step3', '/sfx/metal_steps_12.mp3');
+    this.load.audio('sfx-step4', '/sfx/metal_steps_15.mp3');
+    this.load.audio('sfx-step5', '/sfx/metal_steps_18.mp3');
+    this.load.audio('sfx-hit1', '/sfx/hit05.mp3');
+    this.load.audio('sfx-hit2', '/sfx/hit17.mp3');
+    this.load.audio('sfx-hit3', '/sfx/hit24.mp3');
+    this.load.audio('sfx-hit4', '/sfx/hit26.mp3');
+    this.load.audio('sfx-hit5', '/sfx/hit35.mp3');
+    this.load.audio('sfx-kaboom', '/sfx/kaboom.mp3');
+
     // FX
     this.load.image('pixel', '/fx/pixel.png');
   }
