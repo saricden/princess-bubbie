@@ -27,6 +27,8 @@ class Heart extends Sprite {
 
 			this.destroy();
 		});
+
+		this.body.setVelocityY(-250);
 	}
 }
 

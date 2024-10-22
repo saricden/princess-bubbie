@@ -215,8 +215,8 @@
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":1340,
-                 "y":710
+                 "x":1471,
+                 "y":663
                 }, 
                 {
                  "class":"",
@@ -275,8 +275,8 @@
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":1940.67,
-                 "y":698
+                 "x":2168.67,
+                 "y":709
                 }, 
                 {
                  "class":"",
@@ -301,6 +301,42 @@
                  "width":0,
                  "x":2746.67,
                  "y":606.667
+                }, 
+                {
+                 "class":"",
+                 "height":0,
+                 "id":23,
+                 "name":"jump-skeleton",
+                 "point":true,
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":1292,
+                 "y":705
+                }, 
+                {
+                 "class":"",
+                 "height":0,
+                 "id":24,
+                 "name":"jump-skeleton",
+                 "point":true,
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":1425,
+                 "y":699
+                }, 
+                {
+                 "class":"",
+                 "height":0,
+                 "id":25,
+                 "name":"jump-skeleton",
+                 "point":true,
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":1934,
+                 "y":710
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -309,7 +345,7 @@
          "y":0
         }],
  "nextlayerid":3,
- "nextobjectid":23,
+ "nextobjectid":26,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.1",

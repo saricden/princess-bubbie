@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="201" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="23">
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="201" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="26">
  <editorsettings>
   <export target="../public/maps/test.json" format="json"/>
  </editorsettings>
@@ -128,7 +128,7 @@
   <object id="14" name="ghost" x="2470" y="680">
    <point/>
   </object>
-  <object id="15" name="ghost" x="1340" y="710">
+  <object id="15" name="ghost" x="1471" y="663">
    <point/>
   </object>
   <object id="16" name="gargoyle" x="2104" y="704">
@@ -143,13 +143,22 @@
   <object id="19" name="ghoul" x="810" y="634.667">
    <point/>
   </object>
-  <object id="20" name="ghoul" x="1940.67" y="698">
+  <object id="20" name="ghoul" x="2168.67" y="709">
    <point/>
   </object>
   <object id="21" name="ghoul" x="2637.33" y="796.667">
    <point/>
   </object>
   <object id="22" name="ghoul" x="2746.67" y="606.667">
+   <point/>
+  </object>
+  <object id="23" name="jump-skeleton" x="1292" y="705">
+   <point/>
+  </object>
+  <object id="24" name="jump-skeleton" x="1425" y="699">
+   <point/>
+  </object>
+  <object id="25" name="jump-skeleton" x="1934" y="710">
    <point/>
   </object>
  </objectgroup>

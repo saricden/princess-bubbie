@@ -38,6 +38,7 @@ export default class Boot extends Scene {
 	    this.load.aseprite('ghost', '/sprites/ghost.png', '/sprites/ghost.json');
 	    this.load.aseprite('ghoul', '/sprites/ghoul.png', '/sprites/ghoul.json');
 	    this.load.image('heart', '/sprites/heart-pickup.png');
+	    this.load.aseprite('jump-skeleton', '/sprites/jump-skeleton.png', '/sprites/jump-skeleton.json');
 
 	    // UI
 	    this.load.aseprite('ui-heart', '/sprites/ui/heart.png', '/sprites/ui/heart.json');
@@ -93,6 +94,7 @@ export default class Boot extends Scene {
 		this.anims.createFromAseprite('gargoyle');
 		this.anims.createFromAseprite('ghost');
 		this.anims.createFromAseprite('ghoul');
+		this.anims.createFromAseprite('jump-skeleton');
 
 		this.add.text(w / 2, h / 2, 'Click to Play', {
 	        font: '42px monospace',

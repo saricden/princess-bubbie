@@ -5,6 +5,7 @@ import Sus from '../sprites/Sus';
 import Boo from '../sprites/Boo';
 import Ghost from '../sprites/Ghost';
 import Ghoul from '../sprites/Ghoul';
+import JumpSkeleton from '../sprites/JumpSkeleton';
 
 class MainScene extends Scene {
     constructor() {
@@ -83,6 +84,11 @@ class MainScene extends Scene {
                 const ghoul = new Ghoul(this, obj.x, obj.y);
 
                 this.enemies.push(ghoul);
+            }
+            else if (obj.name === 'jump-skeleton') {
+                const jumpSkeleton = new JumpSkeleton(this, obj.x, obj.y);
+
+                this.enemies.push(jumpSkeleton);
             }
         });
 
