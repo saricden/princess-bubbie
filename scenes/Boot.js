@@ -37,6 +37,7 @@ export default class Boot extends Scene {
 	    this.load.image('boo', '/sprites/boo.png');
 	    this.load.aseprite('ghost', '/sprites/ghost.png', '/sprites/ghost.json');
 	    this.load.aseprite('ghoul', '/sprites/ghoul.png', '/sprites/ghoul.json');
+	    this.load.image('heart', '/sprites/heart-pickup.png');
 
 	    // UI
 	    this.load.aseprite('ui-heart', '/sprites/ui/heart.png', '/sprites/ui/heart.json');
@@ -56,6 +57,7 @@ export default class Boot extends Scene {
 	    this.load.audio('sfx-sword1', '/sfx/sword.4.mp3');
 	    this.load.audio('sfx-sword2', '/sfx/sword.5.mp3');
 	    this.load.audio('sfx-sword3', '/sfx/sword.7.mp3');
+	    this.load.audio('sfx-heart', '/sfx/upshort.mp3');
 
 	    // Music
 	    this.load.audio('music-castle', '/music/That 90s Kid - The Whispering Shadows Dungeon.mp3');

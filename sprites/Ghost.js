@@ -1,4 +1,5 @@
 import {GameObjects, Math as pMath} from 'phaser';
+import Heart from './Heart';
 
 const {Sprite} = GameObjects;
 
@@ -64,6 +65,7 @@ class Ghost extends Sprite {
 			speedY: { min: -200, max: 200 }
 		});
 		this.blood.explode(200);
+		new Heart(this.scene, this.x, this.y - 10);
 		this.destroy();
 	}
 
