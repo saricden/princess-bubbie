@@ -26,9 +26,9 @@ export default class Boot extends Scene {
 	    });
 	    percentText.setOrigin(0.5, 0.5);
 
-	    // Load the Tiled tilemap and tileset image
-	    this.load.tilemapTiledJSON('map-test', '/maps/test.json');
-	    this.load.image('tiles', '/maps/tiles.png');
+	    // Map
+	    this.load.tilemapTiledJSON('map-castle', '/maps/castle1.json');
+	    this.load.image('tiles2', '/maps/tiles2.png');
 
 	    // Sprites
 	    this.load.aseprite('bubbie', '/sprites/bubbie.png', '/sprites/bubbie.json');

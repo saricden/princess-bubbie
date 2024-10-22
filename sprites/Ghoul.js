@@ -139,17 +139,14 @@ class Ghoul extends Sprite {
 		else {
 			// Change direction if blocked left/right, or at the edge
 			const {ground} = this.scene;
-			const tileBelow = ground.getTileAtWorldXY(this.x, this.y + 1);
+			const nextTileBelow = ground.getTileAtWorldXY(this.x + (this.dir * 10), this.y + 1);
+			const doTurn = (this.body.blocked.right || this.body.blocked.left || nextTileBelow?.index !== 3);
 
-			if (tileBelow) {
-				const doTurn = (this.body.blocked.right || this.body.blocked.left || tileBelow.index !== 2);
-
-				if (doTurn && !this.justTurned) {
-					this.dir = -this.dir;
-				}
-
-				this.justTurned = doTurn;
+			if (doTurn && !this.justTurned) {
+				this.dir = -this.dir;
 			}
+
+			this.justTurned = doTurn;
 			
 			this.body.setVelocityX(this.dir * speed);
 			this.setFlipX(this.dir < 0);
