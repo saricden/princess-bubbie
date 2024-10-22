@@ -16,8 +16,6 @@ class Ghoul extends Sprite {
 
 		const {ground} = this.scene;
 
-		this.lowerLeftTile = null;
-		this.lowerRightTile = null;
 		this.speed = 16;
 		this.dir = 1;
 		this.isAttacking = false;
@@ -34,14 +32,12 @@ class Ghoul extends Sprite {
 		this.maxHp = 2;
 		this.hp = this.maxHp;
 		this.invincible = false;
+		this.justTurned = false;
 
 		this.blood = this.scene.add.particles(0, 0, 'pixel', this.bloogConfig);
 		this.blood.stop();
 
-		this.scene.physics.add.collider(this, ground, (g, tile) => {
-			this.lowerLeftTile = ground.getTileAt(tile.x - 1, tile.y + 1);
-			this.lowerRightTile = ground.getTileAt(tile.x + 1, tile.y + 1);
-		});
+		this.scene.physics.add.collider(this, ground);
 
 		this.atkBox = this.scene.add.rectangle(0, 0, 15, 32);
         this.atkBox.setOrigin(0.5, 1);
@@ -132,7 +128,7 @@ class Ghoul extends Sprite {
 	update() {
 		if (!this.body) return;
 
-		const {speed, lowerLeftTile, lowerRightTile, isAttacking} = this;
+		const {speed, isAttacking} = this;
 		const {x: tx} = this.target;
 
 		if (isAttacking) {
@@ -140,12 +136,19 @@ class Ghoul extends Sprite {
 		}
 		else {
 			// Change direction if blocked left/right, or at the edge
-			const doTurn = (this.body.blocked.right || lowerRightTile?.index !== 1 || this.body.blocked.left || lowerLeftTile?.index !== 1);
+			const {ground} = this.scene;
+			const tileBelow = ground.getTileAtWorldXY(this.x, this.y + 1);
 
-			if (doTurn) {
-				this.dir = -this.dir;
+			if (tileBelow) {
+				const doTurn = (this.body.blocked.right || this.body.blocked.left || tileBelow.index !== 2);
+
+				if (doTurn && !this.justTurned) {
+					this.dir = -this.dir;
+				}
+
+				this.justTurned = doTurn;
 			}
-
+			
 			this.body.setVelocityX(this.dir * speed);
 			this.setFlipX(this.dir < 0);
 
